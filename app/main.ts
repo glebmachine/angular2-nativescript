@@ -1,4 +1,4 @@
-import {nativeScriptBootstrap} from "nativescript-angular/application";
-import {AppComponent} from "./app.component";
+import { nativeScriptBootstrap } from "nativescript-angular/application";
+import { AppComponent } from "./app.component";
 
 nativeScriptBootstrap(AppComponent);
