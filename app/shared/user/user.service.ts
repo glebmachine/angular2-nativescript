@@ -11,7 +11,7 @@ export class UserService {
   constructor(private _http: Http) { }
 
   register(user: User) {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append("Content-Type", "application/json");
 
     return this._http.post(
@@ -23,6 +23,26 @@ export class UserService {
       }),
       { headers }
     )
+    .catch(this.handleErrors);
+  }
+
+  login(user: User) {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    return this._http.post(
+      `${Config.apiUrl}oauth/token`,
+      JSON.stringify({
+        username: user.email,
+        password: user.password,
+        grant_type: "password"
+      }),
+      { headers }
+    )
+    .map(response => response.json())
+    .do(data => {
+      Config.token = data.Result.access_token;
+    })
     .catch(this.handleErrors);
   }
 

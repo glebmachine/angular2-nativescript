@@ -19,7 +19,7 @@
     ></TextField>
 
   <Button
-    (tap)="submit()"
+    (tap)="isLoggingIn ? login() : submit()"
     [text]="isLoggingIn ? 'Sign in' : 'Sign up'"
     class="submit-button"
     ></Button>
