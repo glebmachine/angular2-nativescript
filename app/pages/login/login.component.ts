@@ -1,8 +1,12 @@
 import { Router } from "@angular/router";
 
-import { Component } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { User } from "./../../shared/user/user";
 import { UserService } from "./../../shared/user/user.service";
+
+import { Page } from "ui/page";
+import { Color } from "color";
+import { View } from "ui/core/view";
 
 @Component({
   selector: "my-app",
@@ -16,16 +20,24 @@ import { UserService } from "./../../shared/user/user.service";
   ]
 })
 
-export class LoginPage {
+export class LoginPage implements OnInit {
   user: User;
   isLoggingIn = false;
 
+  @ViewChild("container") container: ElementRef;
+
   constructor(
+    private page: Page,
     private _router: Router,
     private _userService: UserService) {
     this.user = new User();
     this.user.email = "user@nativescript.org";
     this.user.password = "password";
+  }
+
+  ngOnInit() {
+    this.page.actionBarHidden = true;
+    this.page.backgroundImage = "res://bg_login";
   }
 
   submit() {
@@ -57,6 +69,11 @@ export class LoginPage {
 
   toggleDisplay() {
     this.isLoggingIn = !this.isLoggingIn;
-  }
+    let container = <View>this.container.nativeElement;
 
+    container.animate({
+      backgroundColor: this.isLoggingIn ? new Color("white") : new Color("#301217"),
+      duration: 200
+    });
+  }
 }

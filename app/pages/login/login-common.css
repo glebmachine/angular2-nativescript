@@ -3,6 +3,7 @@ StackLayout {
   margin-right: 30;
   padding-bottom: 15;
   background-color: white;
+  border-radius: 5;
 }
 Image {
   margin-top: 5;
@@ -12,6 +13,7 @@ Button, TextField {
   margin-left: 16;
   margin-right: 16;
   margin-bottom: 10;
+  border-radius: 5;
 }
 .submit-button {
   background-color: #CB1D00;
